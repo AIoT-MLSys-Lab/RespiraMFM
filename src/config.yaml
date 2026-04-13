@@ -1,0 +1,36 @@
+# Audio Encoder
+audio_encoder: "operaCT"
+audio_peft: "frozen" 
+enc_dim: 768 
+spectrogram_type : "entire" 
+
+# Model Training
+batch_size : 16
+epochs: 10
+
+# Projector + Head
+aligner: "contrastive" 
+proj_hidden: 2048
+head_dropout: 0.2
+
+# LLM
+llm_model: 'phi-2'
+
+
+# LoRA
+llm_peft: "lora" 
+llm_lora_rank: 16
+llm_lora_alpha: 32
+llm_lora_dropout: 0.1
+llm_lora_allproj: True
+LLM_TARGET_MODULES_ALLPROJ : ["q_proj", "k_proj", "v_proj", "o_proj"]
+
+# General
+n_cls: 2
+d_ff: 256 
+max_seq_length: 256 
+patch_nums: 64 
+use_audio: True 
+dataset_subset_fraction: 1
+no_test: True
+multimodal_config: 1  # 1=Audio + Text, 2=Audio Only, 3=Text Only

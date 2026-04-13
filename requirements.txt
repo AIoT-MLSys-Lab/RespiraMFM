@@ -1,0 +1,48 @@
+# Install PyTorch stack first (must be installed together to avoid ABI mismatch):
+#   pip install torch==2.3.0 torchaudio==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121
+#
+# Then install remaining dependencies:
+#   pip install -r requirements.txt
+
+# PyTorch (CUDA 12.1 build — must match torchaudio/torchvision)
+torch==2.3.0
+torchaudio==2.3.0
+torchvision==0.18.0
+
+# LLM / multimodal
+transformers==4.40.2
+peft==0.11.1
+accelerate==1.6.0
+huggingface_hub==0.36.2
+open-clip-torch==2.24.0
+clip==0.2.0
+timm==1.0.3
+efficientnet_pytorch==0.7.1
+
+# Training utilities
+pytorch-lightning==2.5.0.post0
+torchmetrics==1.6.1
+evaluate==0.4.3
+wandb==0.19.6
+tensorboard==2.19.0
+
+# Audio
+librosa==0.10.2.post1
+soundfile==0.12.1
+decord==0.6.0
+
+# Data / numerics
+numpy==1.26.4
+pandas==1.4.2
+scipy==1.12.0
+scikit-learn==1.4.0
+PyWavelets==1.8.0
+h5py==3.16.0
+
+# Misc
+PyYAML==6.0.1
+tqdm==4.67.1
+seaborn==0.13.2
+matplotlib==3.10.8
+pillow==11.1.0
+charset-normalizer==3.4.7

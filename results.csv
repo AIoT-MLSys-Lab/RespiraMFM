@@ -1,0 +1,10 @@
+Task_ID,Dataset_name,AUROC
+T1,ukcovid19,0.908
+T2,coughvid,0.667
+T3,TBscreen,0.743
+T4,icbhi,1.0
+T5,coswara,0.889
+T6,codaTB,0.666
+T7,kauh_copd,0.814
+T8,kauh_asthma,0.579
+T9,kauh_pneumonia,0.724
