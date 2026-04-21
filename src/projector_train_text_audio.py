@@ -107,7 +107,7 @@ def train(model, dataloader, optimizer, device):
     return total_loss / len(dataloader)
 
 
-def train_projector_all_dataset(train_datasets, test_datasets, diag_disease, num_epochs=100, learning_rate=0.001):
+def train_projector_all_dataset(train_datasets, diag_disease, num_epochs=100, learning_rate=0.001):
     config_path = './src/config.yaml'
     with open(config_path, 'r') as file:
         configs = yaml.safe_load(file)
@@ -137,10 +137,6 @@ def train_projector_all_dataset(train_datasets, test_datasets, diag_disease, num
         dataset_root_dir, model_type, train_path, test_path = get_dataset_dir(dataset_name)
         train_dataset = AudioTextDataset(configs, train_path, dataset_name, d_llm, suffix='train')
         all_datasets.append(train_dataset)
-    for dataset_name in test_datasets:
-        dataset_root_dir, model_type, train_path, test_path = get_dataset_dir(dataset_name)
-        test_dataset = AudioTextDataset(configs, test_path, dataset_name, d_llm, suffix='test')
-        all_datasets.append(test_dataset)
     all_datasets_concat = ConcatDataset(all_datasets)
     data_loader = DataLoader(all_datasets_concat, batch_size=64, shuffle=True)
 
@@ -159,44 +155,3 @@ def train_projector_all_dataset(train_datasets, test_datasets, diag_disease, num
 
     torch.save(model.state_dict(), projector_saved_path)
     print('✅️ Projector model saved successfully...')
-
-def main():
-    config_path = './src/config.yaml'
-    with open(config_path, 'r') as file:
-        configs = yaml.safe_load(file)
-    configs = Config(configs)
-
-    batch_size = 64
-    num_epochs = 50
-    learning_rate = 1e-3
-    dataset_name = 'ukcovid19'
-    dataset_root_dir = "/local/scratch1/siam/dataset/resp-dataset/uk-covid-19/"
-    train_path = dataset_root_dir + f"custom_files/train_features.h5"
-    test_path = dataset_root_dir + f"custom_files/test_features.h5"
-    train_cache_path = dataset_root_dir + f"custom_files/text_embeddings_train_cache_{dataset_name}.npy"
-    test_cache_path = dataset_root_dir + f"custom_files/text_embeddings_test_cache_{dataset_name}.npy"
-
-    coswara_dataset_root_dir = "/local/scratch1/siam/dataset/cough-sound-data/coswara/download/Coswara-Data/"
-    cough_type = "cough-shallow"
-    test_path_coswara = coswara_dataset_root_dir + f"custom_files/alldata_{cough_type}_features_qc.h5"
-    test_cache_path_coswara = coswara_dataset_root_dir + f"custom_files/text_embeddings_test_cache_{dataset_name}.npy"
-
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    train_dataset = AudioTextDataset(configs, train_path, dataset_name, cache_path=train_cache_path)
-    test_dataset = AudioTextDataset(configs, test_path, dataset_name, cache_path=test_cache_path)
-    test_dataset_coswara = AudioTextDataset(configs, test_path_coswara, 'coswara', cache_path=test_cache_path_coswara)
-
-    dataset = ConcatDataset([train_dataset, test_dataset, test_dataset_coswara])
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-
-    model = ContrastiveProjectionHead().to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-2, weight_decay=1e-2)
-
-    for epoch in range(num_epochs):
-        loss = train(model, dataloader, optimizer, device)
-        print(f"Epoch {epoch+1}/{num_epochs}, Loss: {loss:.4f}")
-
-    torch.save(model.state_dict(), f'/local/scratch1/siam/saved_models/acl_2026/contrastive_audio_to_text_{dataset_name}.pth')
-
-if __name__ == '__main__':
-    main()

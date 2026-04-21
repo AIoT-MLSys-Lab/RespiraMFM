@@ -1,4 +1,13 @@
+<div align="center">
+<img src="assets/logo_respiramfm.png" alt="RespiraMFM Logo" width="100"> 
+
 # RespiraMFM: A Multimodal Foundation Model with Contrastive Audio-Language Alignment for Respiratory Disease Identification
+
+<a href="https://2026.aclweb.org/"><img src="https://img.shields.io/badge/ACL-2026-red?style=for-the-badge&logo" alt="ACL 2026"/></a>
+<a href="https://aiot-mlsys-lab.github.io/RespiraMFM.github.io/static/pdfs/RespiraMFM.pdf"><img src="https://img.shields.io/badge/Paper-PDF-blue?style=for-the-badge&logo=adobeacrobatreader" alt="Paper PDF"/></a>
+<a href="https://aiot-mlsys-lab.github.io/RespiraMFM.github.io/"><img src="https://img.shields.io/badge/Project-Page-green?style=for-the-badge&logo=googlechrome" alt="Project Page"/></a>
+
+</div>
 
 ## Setup Environment
 Use Anaconda to create a new environment and install the required packages. You can create a new environment and install the required packages using the following commands:

@@ -105,7 +105,7 @@ def main(train_datasets, test_datasets, diag_disease='all', retrain_projector=Tr
 
     if retrain_projector:
         if configs.multimodal_config != 3 and configs.aligner != "projection":
-            train_projector_all_dataset(train_datasets, [], diag_disease, num_epochs=500)
+            train_projector_all_dataset(train_datasets, diag_disease, num_epochs=500)
 
     model = AudioLLM(configs, diag_disease=diag_disease).to(device)
 
@@ -125,7 +125,7 @@ def main(train_datasets, test_datasets, diag_disease='all', retrain_projector=Tr
     criterion = torch.nn.CrossEntropyLoss()
 
     print("🔥 Training Started....")
-    num_epoch = 40
+    num_epoch = 20
     best_avg = 0
 
     for epoch in range(num_epoch):
