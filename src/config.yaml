@@ -5,7 +5,7 @@ enc_dim: 768
 spectrogram_type : "entire" 
 
 # Model Training
-batch_size : 16
+batch_size : 4
 epochs: 10
 
 # Projector + Head
@@ -18,7 +18,7 @@ llm_model: 'phi-2'
 
 
 # LoRA
-llm_peft: "lora" 
+llm_peft: "lora"  # "lora" or "frozen" or "full_ft"
 llm_lora_rank: 16
 llm_lora_alpha: 32
 llm_lora_dropout: 0.1

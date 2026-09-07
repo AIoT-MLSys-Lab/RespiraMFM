@@ -149,7 +149,7 @@ def main(train_datasets, test_datasets, diag_disease='all', retrain_projector=Tr
             best_avg = current_avg
 
         if save_flag:
-            model_saved_path = f"/local/scratch1/siam/saved_models/acl_2026/respiramfm/audio_llm_model_{diag_disease}_{configs.llm_model}_{configs.aligner}_{configs.multimodal_config}_epoch{epoch}.pth"
+            model_saved_path = f"/local/scratch1/siam/saved_models/acl_2026/respiramfm/audio_llm_model_{diag_disease}_{configs.llm_model}_{configs.aligner}_{configs.multimodal_config}_{configs.llm_peft}_epoch{epoch}.pth"
             torch.save(model.state_dict(), model_saved_path)
             print(f"Full model with projector saved in directory: {model_saved_path}")
 

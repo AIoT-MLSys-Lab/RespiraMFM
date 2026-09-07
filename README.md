@@ -44,7 +44,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train.py
 ## Evaluation
 You can run the inference code using the following command 
 to run on respiratory disease datasets. 
-Download our pre-trained model weights from [here](https://buckeyemailosu-my.sharepoint.com/:f:/g/personal/siam_5_buckeyemail_osu_edu/IgAA90FBALRCQrz-4pdxmWJMAVaajwrSrM3RZ2qBVBS0CBY?e=REeLMD)
+Download our pre-trained model weights from [here](https://buckeyemailosu-my.sharepoint.com/:f:/r/personal/siam_5_osu_edu/Documents/MyResearch/RespiraMFM/ACL_final_models?d=w161e63d8be484f84962c43e62b86c994&csf=1&web=1&e=qNNV1M)
 into `model/` directory.
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/evaluate.py

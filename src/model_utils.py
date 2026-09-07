@@ -202,6 +202,10 @@ class AudioLLM(nn.Module):
         elif self.llm_peft == "frozen":
             for param in self.llm_model.parameters():
                 param.requires_grad = False
+        elif self.llm_peft == "full_ft":
+            for param in self.llm_model.parameters():
+                param.requires_grad = True
+            print("LLM: Full fine-tuning (all parameters trainable)")
         else:
             return NotImplementedError("LLM fine-tuning mode undefined")
 
@@ -251,7 +255,7 @@ class AudioLLM(nn.Module):
                 self.freeze_aligner = True
             self.aligner = ContrastiveProjectionHead(out_dim=self.d_llm)
             # self.aligner = ContrastiveProjectionHead_new(out_dim=self.d_llm)
-            aligner_model_path = f'/local/scratch1/siam/saved_models/acl_2026/final_models/contrastive_audio_to_text_{diag_disease}_{self.d_llm}_notest.pth'
+            aligner_model_path = f'/local/scratch1/siam/saved_models/acl_2026/final_models/contrastive_audio_to_text_{diag_disease}_{self.d_llm}_final.pth'
 
 
             print(f'🔴 Alignment Module Loaded from:  {aligner_model_path}')
@@ -284,6 +288,9 @@ class AudioLLM(nn.Module):
         elif self.llm_peft == "frozen":
             for param in self.llm_model.parameters():
                 param.requires_grad = False
+        elif self.llm_peft == "full_ft":
+            for param in self.llm_model.parameters():
+                param.requires_grad = True
 
         if not self.freeze_aligner:
             for param in self.aligner.parameters():

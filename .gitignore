@@ -2,3 +2,4 @@ cached_files/*
 results_log/*
 *__pycache__/
 *ipynb_checkpoints/
+src/train_cross_entropy.py
